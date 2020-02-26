@@ -50,13 +50,13 @@ INSERT INTO Status (ISBN, BookAmount, BookRented) VALUES (22222, 5,0);
 INSERT INTO Status (ISBN, BookAmount, BookRented) VALUES (11111, 5,0);
 
 -- Borrowed
-INSERT INTO Borrowed (ISBN, CPRNumber, LoanPeriodStart, LoanPeriodEnd) VALUES (51232, 1234567891, '2020-02-25', '2020-02-28');  --Student 
-INSERT INTO Borrowed (ISBN, CPRNumber, LoanPeriodStart, LoanPeriodEnd) VALUES (51232, 1234567891, '2020-02-25', '2020-02-28');  --Student 
-INSERT INTO Borrowed (ISBN, CPRNumber, LoanPeriodStart, LoanPeriodEnd) VALUES (51233, 1234567891, '2020-01-25', '2020-02-12');  --Student 
-INSERT INTO Borrowed (ISBN, CPRNumber, LoanPeriodStart, LoanPeriodEnd) VALUES (51232, 1234567831, '2020-02-25', '2020-02-28');  --Student 
-INSERT INTO Borrowed (ISBN, CPRNumber, LoanPeriodStart, LoanPeriodEnd) VALUES (55555, 1234567831, '2020-02-25', '2020-03-28');  --Student 
-INSERT INTO Borrowed (ISBN, CPRNumber, LoanPeriodStart, LoanPeriodEnd) VALUES (22222, 1234567851, '2020-01-25', '2020-02-12');  --Student 
-INSERT INTO Borrowed (ISBN, CPRNumber, LoanPeriodStart, LoanPeriodEnd) VALUES (22222, 1111111111, '2020-02-25', '2020-02-28');  --Teacher
-INSERT INTO Borrowed (ISBN, CPRNumber, LoanPeriodStart, LoanPeriodEnd) VALUES (51233, 1111111111, '2020-02-25', '2020-02-28');  --Teacher
-INSERT INTO Borrowed (ISBN, CPRNumber, LoanPeriodStart, LoanPeriodEnd) VALUES (44444, 7777777772, '2020-01-25', '2020-02-12');  --Guest
-INSERT INTO Borrowed (ISBN, CPRNumber, LoanPeriodStart, LoanPeriodEnd) VALUES (11111, 7777777777, '2020-02-25', '2020-02-28');  --Guest
+SELECT LoanABook(51232, 1234567891, '2020-02-25', '2020-02-28');  --Student 
+SELECT LoanABook(51232, 1234567891, '2020-02-25', '2020-02-28');  --Student 
+SELECT LoanABook(51233, 1234567891, '2020-01-25', '2020-02-12');  --Student 
+SELECT LoanABook(51232, 1234567831, '2020-02-25', '2020-02-28');  --Student 
+SELECT LoanABook(55555, 1234567831, '2020-02-25', '2020-03-28');  --Student 
+SELECT LoanABook(22222, 1234567851, '2020-01-25', '2020-02-12');  --Student
+SELECT LoanABook(22222, 1111111111, '2020-02-25', '2020-02-28');  --Teacher
+SELECT LoanABook(51233, 1111111111, '2020-02-25', '2020-02-28');  --Teacher
+SELECT LoanABook(44444, 7777777772, '2020-01-25', '2020-02-12');  --Guest
+SELECT LoanABook(11111, 7777777777, '2020-02-25', '2020-02-28');  --Guest
