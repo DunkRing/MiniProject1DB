@@ -2,7 +2,7 @@
 > **Authors** Jonas Manley & Christoffer Dunk
  
 Opgave beskrivelse
-billede
+![enter image description here](https://github.com/DunkRing/MiniProject1DB/blob/master/dbopgave-page-001.jpg)
 
 ## Opsætnings Guide
 Følg disse steps til opsætning af Progresql Database så den afspejler og lever op til opgavesættet ovenfor.
