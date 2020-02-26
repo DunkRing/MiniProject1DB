@@ -23,7 +23,7 @@ create table Orders(
 	foreign key (ISBN) references Book (ISBN)
 );
 
-create table borrowed
+create table Borrowed
 (
 	BorrowId serial primary key, 
 	ISBN int,
@@ -34,7 +34,7 @@ create table borrowed
 	foreign key (CPRNumber) references Loaner (CPRNumber)	
 );
 
-Create table status
+Create table Status
 (
 	StatusId serial primary key,
 	ISBN int,
