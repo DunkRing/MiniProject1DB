@@ -8,7 +8,7 @@ RETURNS void AS $$
 DECLARE
   copiesOfSelectedBook int 			:= (SELECT BookAmount FROM Status WHERE ISBN = ISBNNumberValue);  	--Fecthing how many copies of a book
   amountRentedOut int 				:= (SELECT BookRented FROM Status WHERE ISBN = ISBNNumberValue);  	--Fecthing how many book of one type is rented out
-  typeOfLoaner varchar(100) 			:= (SELECT TypeOf FROM Loaner WHERE CPRNumber = CPRNumbmerValue); 	--Fecthing the loaners type
+  typeOfLoaner varchar(100) 			:= (SELECT Type FROM Loaner WHERE CPRNumber = CPRNumbmerValue); 	--Fecthing the loaners type
   loanersRentedBookAmount int 			:= (SELECT COUNT(*) FROM Borrowed WHERE CPRNumber = CPRNumbmerValue); 	--Fecthing amount of books the loaner has rented
 BEGIN
   IF copiesOfSelectedBook > amountRentedOut THEN
@@ -95,7 +95,7 @@ SELECT CheckBookIsAvail(44444);
 CREATE OR REPLACE FUNCTION CheckMostPopularTitleStudents()
 RETURNS varChar(50) AS $$
 DECLARE
-	isbnOfMostPopularBook int := (SELECT ISBN FROM (SELECT ISBN, COUNT(*) FROM Borrowed INNER JOIN Loaner ON Loaner.CPRNumber = Borrowed.CPRNumber WHERE Loaner.TypeOf = 'Student' GROUP BY ISBN ORDER BY COUNT DESC LIMIT 1) a);
+	isbnOfMostPopularBook int := (SELECT ISBN FROM (SELECT ISBN, COUNT(*) FROM Borrowed INNER JOIN Loaner ON Loaner.CPRNumber = Borrowed.CPRNumber WHERE Loaner.Type = 'Student' GROUP BY ISBN ORDER BY COUNT DESC LIMIT 1) a);
 	bookTitle varchar(100) := (SELECT Book.Title FROM Book WHERE ISBN = isbnOfMostPopularBook);
 BEGIN
 	RETURN bookTitle;
