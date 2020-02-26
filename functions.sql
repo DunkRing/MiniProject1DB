@@ -63,7 +63,7 @@ INSERT INTO Borrowed (ISBN, CPRNumber, LoanPeriodStart, LoanPeriodEnd) VALUES (2
 INSERT INTO Status (ISBN, BookAmount, BookRented) VALUES (11111, 2, 0);
 INSERT INTO Status (ISBN, BookAmount, BookRented) VALUES (88888, 5, 0);
 
--- Function call
+-- Test the Function "LoanABookby" running the line below 
 SELECT LoanABook(11111, '1234561891', '2020-02-15', '2020-02-28');
 
 -- Test helpers
@@ -86,7 +86,7 @@ BEGIN
 END; $$
 LANGUAGE PLPGSQL;
 
--- Test Function
+-- Test the Function "CheckBookIsAvail" by running the line below 
 SELECT CheckBookIsAvail(44444);
 
 
@@ -102,7 +102,7 @@ BEGIN
 END; $$
 LANGUAGE PLPGSQL;
 
--- Test functionality 
+-- Test the Function "CheckMostPopularTitleStudents" running the line below 
 select CheckMostPopularTitleStudents();
 
 
