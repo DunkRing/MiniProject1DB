@@ -12,14 +12,14 @@ create table Loaner(
 	Name varchar(100), 
 	Address varchar(100), 
 	Type varchar(100),
-	primary key (CPRNummer)
+	primary key (CPRNumber)
 );
 
 create table Orders(
 	OrderId SERIAL PRIMARY KEY, 
 	ISBN int,
 	CPRNumber char(10),
-	foreign key (CPRNummer) references Loaner (CPRNummer),
+	foreign key (CPRNumber) references Loaner (CPRNumber),
 	foreign key (ISBN) references Book (ISBN)
 );
 
