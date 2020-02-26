@@ -1,49 +1,49 @@
 ------ lOAN FUNCTIONALITY WITH BUSINESS CONSTRAINS ----------
---BUSINESS CONSTRAINTS:
+-- BUSINESS CONSTRAINTS:
 -- 1. STUDENT CAN RENT 3 BOOK, TEACHER 2 BOOKS, GUEST 1 BOOK
 -- 2. DIFFERENT PEOPLE CAN BORROW A BOOK WITH THE SAME ISBN IF THERES ONE AVAILABLE
 
-CREATE OR REPLACE FUNCTION inc2(isbnNumnerval integer, cprnumbmerval varchar(10), loanperiodstartval date, loanperiodendval date)
+CREATE OR REPLACE FUNCTION LoanABook(ISBNNumberValue integer, CPRNumbmerValue varchar(10), LoanPeriodStartValue date, LoanPeriodEndValue date)
 RETURNS void AS $$
 DECLARE
-  a int := (SELECT bookamount FROM status WHERE isbn = isbnNumnerval);  --Fecthing how many copies of a book
-  b int := (SELECT bookrented FROM status WHERE isbn = isbnNumnerval);  --Fecthing how many book a one type is rented out
-  fetchedtype varchar(100) := (SELECT typeof FROM loaner WHERE cprnummer = cprnumbmerval); --Fecthing the loaners type
-  fetchedtypeRentedbookamount int := (SELECT COUNT(*) FROM borrowed where cprnummer = '1234567890'); --Fecthing the loaners type
+  copiesOfSelectedBook int 			:= (SELECT bookamount FROM status WHERE isbn = ISBNNumberValue);  	--Fecthing how many copies of a book
+  amountRentedOut int 				:= (SELECT bookrented FROM status WHERE isbn = ISBNNumberValue);  	--Fecthing how many book of one type is rented out
+  typeOfLoaner varchar(100) 			:= (SELECT typeof FROM loaner WHERE cprnummer = CPRNumbmerValue); 	--Fecthing the loaners type
+  loanersRentedBookAmount int 			:= (SELECT COUNT(*) FROM borrowed where cprnummer = CPRNumbmerValue); 	--Fecthing amount of books the loaner has rented
 BEGIN
-  IF a > b THEN
-	IF fetchedtype = 'Student' THEN
-		IF fetchedtypeRentedbookamount < 3 THEN
+  IF copiesOfSelectedBook > amountRentedOut THEN
+	IF typeOfLoaner = 'Student' THEN
+		IF loanersRentedBookAmount < 3 THEN
 			RAISE NOTICE 'Book available, renting one out..';
 			--Creates a new borrow
-			insert into borrowed (isbn, cprnummer, loanperiodstart, loanperiodend)
-			values (isbnNumnerval, cprnumbmerval, loanperiodstartval, loanperiodendval);
+			INSERT INTO borrowed (isbn, cprnummer, loanperiodstart, loanperiodend)
+			VALUES (ISBNNumberValue, CPRNumbmerValue, LoanPeriodStartValue, LoanPeriodEndValue);
 			--Updates the status
-			update status SET bookrented = bookrented+1 where isbn=isbnNumnerval;
+			UPDATE status SET bookrented = bookrented+1 WHERE isbn=ISBNNumberValue;
 		ELSE
 			RAISE NOTICE 'STUDENT - du kan ikke låne flere bøger';
 		END IF;
 
-	ELSIF fetchedtype = 'Teacher' THEN
-		IF fetchedtypeRentedbookamount < 2 THEN
+	ELSIF typeOfLoaner = 'Teacher' THEN
+		IF loanersRentedBookAmount < 2 THEN
 			RAISE NOTICE 'Book available, renting one out..';
 			--Creates a new borrow
-			insert into borrowed (isbn, cprnummer, loanperiodstart, loanperiodend)
-			values (isbnNumnerval, cprnumbmerval, loanperiodstartval, loanperiodendval);
+			INSERT INTO borrowed (isbn, cprnummer, loanperiodstart, loanperiodend)
+			VALUES (ISBNNumberValue, CPRNumbmerValue, LoanPeriodStartValue, LoanPeriodEndValue);
 			--Updates the status
-			update status SET bookrented = bookrented+1 where isbn=isbnNumnerval;
+			UPDATE status SET bookrented = bookrented+1 WHERE isbn=ISBNNumberValue;
 		ELSE
 			RAISE NOTICE 'TEACHER - du kan ikke låne flere bøger';
 		END IF;
 
 	ELSE
-		IF fetchedtypeRentedbookamount < 1 THEN
+		IF loanersRentedBookAmount < 1 THEN
 			RAISE NOTICE 'Book available, renting one out..';
 			--Creates a new borrow
-			insert into borrowed (isbn, cprnummer, loanperiodstart, loanperiodend)
-			values (isbnNumnerval, cprnumbmerval, loanperiodstartval, loanperiodendval);
+			INSERT INTO borrowed (isbn, cprnummer, loanperiodstart, loanperiodend)
+			VALUES (ISBNNumberValue, CPRNumbmerValue, LoanPeriodStartValue, LoanPeriodEndValue);
 			--Updates the status
-			update status SET bookrented = bookrented+1 where isbn=isbnNumnerval;
+			UPDATE status SET bookrented = bookrented+1 WHERE isbn=ISBNNumberValue;
 		ELSE
 			RAISE NOTICE 'GUEST - du kan ikke låne flere bøger';
 		END IF;
@@ -58,19 +58,20 @@ LANGUAGE PLPGSQL;
 
 
 -- TEST FUNKTIONALITET AND SHORTCUTS --
-Insert into borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values (22222, 1234567890, '2020-02-25', '2020-02-28');
+INSERT INTO borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values (22222, 1234567890, '2020-02-25', '2020-02-28');
 
-insert into status (isbn, bookamount, bookrented) values (11111, 2, 0);
-insert into status (isbn, bookamount, bookrented) values (88888, 5, 0);
+INSERT INTO status (isbn, bookamount, bookrented) values (11111, 2, 0);
+INSERT INTO status (isbn, bookamount, bookrented) values (88888, 5, 0);
 
 -- Function call
-select inc2(11111, '1234561891', '2020-02-15', '2020-02-28');
+select LoanABook(11111, '1234561891', '2020-02-15', '2020-02-28');
 
 -- Test helpers
 delete from borrowed;
 update status set bookrented = 0 where isbn=88888;
 select * from borrowed;
 select * from status;
+
 
 
 
