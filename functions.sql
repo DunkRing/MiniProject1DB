@@ -79,8 +79,8 @@ SELECT * FROM Status;
 CREATE OR REPLACE FUNCTION CheckBookIsAvail(ISBNNumber integer)
 RETURNS int AS $$
 DECLARE
-	copiesOfSelectedBook int	:= (SELECT BookAmount FROM Status WHERE ISBN = 44444);  --Fecthing how many copies of a book
-  	amountRentedOut int 		:= (SELECT BookRented FROM Status WHERE ISBN = 44444);  --Fecthing how many book a one type is rented out
+	copiesOfSelectedBook int	:= (SELECT BookAmount FROM Status WHERE ISBN = ISBNNumber);  --Fecthing how many copies of a book
+  	amountRentedOut int 		:= (SELECT BookRented FROM Status WHERE ISBN = ISBNNumber);  --Fecthing how many book a one type is rented out
 BEGIN
 	RETURN copiesOfSelectedBook - amountRentedOut;
 END; $$
