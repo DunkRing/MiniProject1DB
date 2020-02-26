@@ -33,3 +33,13 @@ create table borrowed
 	foreign key (isbn) references book (isbn),
 	foreign key (CPRNummer) references loaner (CPRNummer)	
 );
+
+Create table status
+(
+	statusid serial primary key,
+	isbn int,
+	bookamount int, 
+	bookrented int, 
+	foreign key (isbn) references book (isbn)	
+)
+
