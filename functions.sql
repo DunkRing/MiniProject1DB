@@ -104,3 +104,14 @@ LANGUAGE PLPGSQL;
 -- Test functionality 
 select CheckMostPopularTitleStudents();
 
+
+
+
+------ The library wants to keep track of each copy of each book’s status and location at any time. ------
+--- Overview of all books
+select * from borrowed inner JOIN book ON book.isbn = borrowed.isbn;
+
+--- giving a isbn return alle the people who has rented it
+select cprnummer, borrowed.isbn, count(*) from borrowed inner JOIN book ON book.isbn = borrowed.isbn GROUP BY cprnummer,borrowed.isbn ORDER BY cprnummer DESC;
+
+
