@@ -27,8 +27,34 @@ Insert into loaner values(7777777771, 'Valde', 'gryn 12, 4000 Roskilde', 'Guest'
 Insert into loaner values(7777777772, 'Jyde', 'duestræde 91, 4000 Roskilde', 'Guest');
 Insert into loaner values(7777777773, 'Rasmus', 'allé gade 86, 4000 Roskilde', 'Guest');
 
--- Order data
-Insert into orders (isbn, cprnummer) values(51232, 1234567891);
-Insert into orders (isbn, cprnummer) values(51233, 1234567821);
-Insert into orders (isbn, cprnummer) values(12345, 1234567831);
-Insert into orders (isbn, cprnummer) values(51232, 1234567831);
+-- Orders 
+Insert into orders (isbn, cprnummer) values(123523, 1234567890);
+Insert into orders (isbn, cprnummer) values(22222, 1234567890);
+Insert into orders (isbn, cprnummer) values(33333, 1234567821);
+Insert into orders (isbn, cprnummer) values(11111, 1234567821);
+Insert into orders (isbn, cprnummer) values(88888, 1234567821);
+Insert into orders (isbn, cprnummer) values(33333, 1234567891);
+Insert into orders (isbn, cprnummer) values(11111, 1234567891);
+Insert into orders (isbn, cprnummer) values(11111, 1234567871);
+Insert into orders (isbn, cprnummer) values(55555, 1234567871);
+
+
+-- Status
+insert into status (isbn, bookamount, bookrented) values(12345, 5,0);
+insert into status (isbn, bookamount, bookrented) values(55555, 5,0);
+insert into status (isbn, bookamount, bookrented) values(44444, 5,0);
+insert into status (isbn, bookamount, bookrented) values(33333, 5,0);
+insert into status (isbn, bookamount, bookrented) values(22222, 5,0);
+insert into status (isbn, bookamount, bookrented) values(11111, 5,0);
+
+-- Borrowed
+Insert into borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values (22222, 1234567891, '2020-02-25', '2020-02-28');
+Insert into borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values(88888, 1234567890, '2020-02-25', '2020-02-28');
+Insert into borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values(12345, 1234567890, '2020-01-25', '2020-02-12');
+Insert into borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values(55555, 1234567891, '2020-02-25', '2020-02-28');
+Insert into borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values(33333, 1234567891, '2020-02-25', '2020-03-28');
+Insert into borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values(22222, 1234567891, '2020-01-25', '2020-02-12');
+Insert into borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values(11111, 1234567891, '2020-02-25', '2020-02-28');
+Insert into borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values(33333, 1234567881, '2020-02-25', '2020-02-28');
+Insert into borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values(22222, 1234567881, '2020-01-25', '2020-02-12');
+Insert into borrowed (isbn, CPRNummer, LoanPeriodStart, LoanPeriodEnd)values(11111, 1234567881, '2020-02-25', '2020-02-28');
