@@ -72,3 +72,18 @@ update status set bookrented = 0 where isbn=88888;
 select * from borrowed;
 select * from status;
 
+
+
+------ Current availability of a copy of a specific book ----------
+CREATE OR REPLACE FUNCTION CheckBookIsAvail(ISBNNumber integer)
+RETURNS int AS $$
+DECLARE
+	a int := (SELECT bookamount FROM status WHERE isbn = 44444);  --Fecthing how many copies of a book
+  	b int := (SELECT bookrented FROM status WHERE isbn = 44444);  --Fecthing how many book a one type is rented out
+BEGIN 
+	RETURN a-b;
+END; $$
+LANGUAGE PLPGSQL;
+
+-- Test Function
+Select CheckBookIsAvail(44444);
