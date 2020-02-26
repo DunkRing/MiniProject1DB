@@ -87,3 +87,20 @@ LANGUAGE PLPGSQL;
 
 -- Test Function
 Select CheckBookIsAvail(44444);
+
+
+
+---------- Function for getting the most popular book title amog students ----------
+CREATE OR REPLACE FUNCTION CheckMostPopularTitleStudents()
+RETURNS varChar(50) AS $$
+DECLARE
+	isbnOfMostPopularBook int := (SELECT isbn FROM(select isbn, count(*) from borrowed inner JOIN loaner ON loaner.cprnummer = borrowed.cprnummer where loaner.typeof = 'Student' GROUP BY isbn ORDER BY count DESC limit 1) a);
+	bookTitle varchar(100) := (select book.title from book where isbn=isbnOfMostPopularBook);
+BEGIN
+	return bookTitle;
+END; $$
+LANGUAGE PLPGSQL;
+
+-- Test functionality 
+select CheckMostPopularTitleStudents();
+
