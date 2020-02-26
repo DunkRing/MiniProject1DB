@@ -8,17 +8,17 @@ create table Book(
 );
 
 create table Loaner(
-	CPRNummer char(10),
-	name varchar(100), 
-	adress varchar(100), 
-	type varchar(100),
+	CPRNumber char(10),
+	Name varchar(100), 
+	Address varchar(100), 
+	Type varchar(100),
 	primary key (CPRNummer)
 );
 
 create table Orders(
 	OrderId SERIAL PRIMARY KEY, 
 	ISBN int,
-	CPRNummer char(10),
+	CPRNumber char(10),
 	foreign key (CPRNummer) references Loaner (CPRNummer),
 	foreign key (ISBN) references Book (ISBN)
 );
@@ -26,20 +26,20 @@ create table Orders(
 create table borrowed
 (
 	BorrowId serial primary key, 
-	isbn int,
-	CPRNummer char(10),
+	ISBN int,
+	CPRNumber char(10),
 	LoanPeriodStart date,
 	LoanPeriodEnd date,
-	foreign key (isbn) references book (isbn),
-	foreign key (CPRNummer) references loaner (CPRNummer)	
+	foreign key (ISBN) references Book (ISBN),
+	foreign key (CPRNumber) references Loaner (CPRNumber)	
 );
 
 Create table status
 (
-	statusid serial primary key,
-	isbn int,
-	bookamount int, 
-	bookrented int, 
-	foreign key (isbn) references book (isbn)	
+	StatusId serial primary key,
+	ISBN int,
+	BookAmount int, 
+	BookRented int, 
+	foreign key (ISBN) references Book (ISBN)	
 )
 
